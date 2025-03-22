@@ -1,4 +1,3 @@
-
 import sys
 import os
 import requests
@@ -24,7 +23,6 @@ def error_text(text): print(f" {Style.RESET_ALL}{Style.BRIGHT}{Fore.RED}[!] {tex
 def warning_text(text): print(f" {Style.RESET_ALL}{Style.BRIGHT}{Fore.YELLOW}[!] {text}{Style.RESET_ALL}")
 def input_text(text): return input(f" {Style.RESET_ALL}{Style.BRIGHT}{Fore.BLUE}[*] {text} >>{Fore.RESET} ")
 
-# Détection de Hashcat
 def find_hashcat():
     possible_paths = ["hashcat", "hashcat.exe", "/usr/bin/hashcat"]
     for path in possible_paths:
@@ -66,7 +64,6 @@ def crack_with_hashcat(hash_value, hash_type, wordlist):
     show_result = subprocess.run(show_cmd, capture_output=True, text=True)
     return show_result.stdout
 
-# Brute force simple
 def simple_bruteforce(hash_value, algorithm, max_length=4, charset="abcdefghijklmnopqrstuvwxyz"):
     for length in range(1, max_length + 1):
         for attempt in itertools.product(charset, repeat=length):
@@ -110,7 +107,6 @@ def check_hash(text_hash):
     except ValueError:
         error_text("Format invalide. Utilisez 'texte:hash'")
 
-# Cracking via API (optionnel, limité)
 def crack_with_api(hash_value, email, code):
     url = f"https://md5decrypt.net/en/Api/api.php?hash={hash_value}&hash_type=md5&email={email}&code={code}"
     headers = {"User-Agent": "Mozilla/5.0"}
